@@ -1,0 +1,44 @@
+Here's an outline of the main goals of the project, along with some of the
+design choices being made to make the project extensible for the future direction
+of PCS.
+
+PCS Website
+-----------------
+The current PCS website is a static site using a version of node that pre-dates several
+breaking changes. This means that further development on the current codebase would require
+serious refactoring, and the adoption of new modules since several of the dependencies have
+deprecated in future versions. Lack of any documentation also makes collaborative development
+a huge chore, so much so that starting from scratch would be a more effective use of our time and
+would result in a much better final product. Here are some of the main functionality we want to see
+from this project:
+    - Ability to host dynamic content, including web apps and data visualizations that are currently/previously
+    developed by PCS.
+    - Easy to use admin dashboard for composing and publishing articles. This will require a separately hosted
+    backend with an API our webapp can query to populate pages it renders for the user.
+    - Thorough documentation to support future web development teams with adapting the website to their needs
+        - Includes documentation for project PMs who wish to have their dynamic projects hosted on the site
+    - Systematic method for designing and adding data visualizations to articles/projects hosted on the site
+    - A unique web animation for our splash page to entice new members/readers
+    - Optimized SEO for first-in-search ranking (so server-side rendering and liberal use of hyperlinks to external sources)
+
+Design Choices
+------------------
+I'm currently in the process of developing similar web apps for several publications on campus. These have very similar
+design considerations, and so I've spent a lot of time thinking about the best tools we can leverage to simplify development
+both now and in the future. Here's what I've decided on:
+    - Sveltekit - Sveltekit is a node JS framework for building web applications. Leveraging the already very popular Svelte UI
+    framework, Sveltekit takes it a step further by adding file-based routing and server-side rendering. Sveltekit websites have
+    some of the smoothest transitions, fastest loading times, and more importantly the most simple codebase for new developers to
+    get a hang of.
+    - Strapi - Because our backend isn't particularly complicated, it's better to use an industry-standard out of the box back end and
+    adapt it to our needs than trying to create something from scratch. Strapi has excellent API support, making it really easy for us
+    to develop a site that queries a strapi back end. In addition, strapi has a beautiful interface for administrators to add new content
+    and publish. This means our PCS web committee won't need to know anything about the website to create, publish, and manage articles.
+    - Three.js - For the animations we should leverage three.js. I will let Max decide whether he prefers to use vanilla Three.JS or
+    the svelte-component based svelthree or threlte. If you happen to have extensive experience with web animations, please also message
+    me about this. Your input is valuable :)
+    - Bootstrap/Bulma/etc - We'll use some css library to rapidly develop our front end. There are also several svelte component based
+    css frameworks. We'll discuss this further during our next meeting, where we'll decide which aesthetic looks most suitable for PCS.
+
+All of this will run on a linux box hosted by the cheapest cloud provider. We'll use REST API for our web application to interact with our
+backend. I originally wanted to use GraphQL, but REST is the easiest place to start.
